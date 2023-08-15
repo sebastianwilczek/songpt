@@ -1,5 +1,7 @@
 # songpt
 
+[![npm version](https://img.shields.io/npm/v/songpt.svg?style=flat-square)](https://www.npmjs.org/package/songpt)
+
 songpt is a Node.js package that generates tracks for music playlists fitting input prompts.
 
 Input prompts may either be string prompts ("keywords") or a list of already present songs. songpt attempts to extract a common category among the given songs. Additionally, the package has functions to query the returned song title names against Spotify and to create playlists based on the generated suggestions.
