@@ -1,6 +1,6 @@
 {
   "name": "songpt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node.js module to generate song playlists using OpenAI's GPT and Spotify's API.",
   "main": "index.js",
   "scripts": {
@@ -9,5 +9,9 @@
   "type": "module",
   "keywords": ["openai", "gpt", "spotify", "songs", "generation", "playlist"],
   "author": "Sebastian Wilczek",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sebastianwilczek/songpt.git"
+  }
 }
