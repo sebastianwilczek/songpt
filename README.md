@@ -10,6 +10,8 @@ songpt is a Node.js package that generates tracks for music playlists fitting in
 
 Input prompts may either be string prompts ("keywords") or a list of already present songs. songpt attempts to extract a common category among the given songs. Additionally, the package has functions to query the returned song title names against Spotify and to create playlists based on the generated suggestions.
 
+**CAUTION: songpt uses the experimental fetch introduced in Node.js v17. Usage of v18 LTS or above is required.**
+
 ## Try it out
 
 You can find a web platform using songpt here: [songpt.ai](https://songpt-ai.web.app). The platform allows you to generate playlists based on text input. It requires access to an OpenAI API key to work. The sources can be found in this repository: [songpt-ai](https://github.com/sebastianwilczek/songpt-ai).
