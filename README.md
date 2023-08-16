@@ -12,7 +12,9 @@ Input prompts may either be string prompts ("keywords") or a list of already pre
 
 ## Try it out
 
-To try out the package, clone this repository. songpt comes preloaded with a script to try out the functionality. You can find it at `test/tryout.js`.
+You can find a web platform using songpt here: [songpt.ai](https://songpt-ai.web.app). The platform allows you to generate playlists based on text input. It requires access to an OpenAI API key to work. The sources can be found in this repository: [songpt-ai](https://github.com/sebastianwilczek/songpt-ai).
+
+To try out the package locally, clone this repository. songpt comes preloaded with a script to try out the functionality. You can find it at `test/tryout.js`.
 To run the script, fill in the parameters in `package.json`:
 ```
 "scripts": {
