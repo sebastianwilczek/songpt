@@ -1,6 +1,6 @@
 {
   "name": "songpt",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Node.js module to generate song playlists using OpenAI's GPT and Spotify's API.",
   "main": "index.js",
   "scripts": {
