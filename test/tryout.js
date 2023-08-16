@@ -1,4 +1,4 @@
-import { generatePlaylistBasedOnSongs, generatePlaylistBasedOnKeywords } from "../index.js";
+const { generatePlaylistBasedOnSongs, generatePlaylistBasedOnKeywords } = require("../index.js");
 
 const testSuggestionsBasedOnSongs = async () => {
   const args = process.argv.slice(2);
@@ -26,8 +26,6 @@ const testSuggestionsBasedOnSongs = async () => {
   console.log(`https://open.spotify.com/playlist/${playlistId}`);
 };
 
-await testSuggestionsBasedOnSongs();
-
 const testSuggestionsBasedOnKeywords = async () => {
   const args = process.argv.slice(2);
 
@@ -54,4 +52,7 @@ const testSuggestionsBasedOnKeywords = async () => {
   console.log(`https://open.spotify.com/playlist/${playlistId}`);
 };
 
-await testSuggestionsBasedOnKeywords();
+(async () => {
+  await testSuggestionsBasedOnSongs();
+  await testSuggestionsBasedOnKeywords();
+})();

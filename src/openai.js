@@ -115,7 +115,7 @@ const generateSuggestions = async (
  * @param {string} gptModel The GPT model to use. Defaults to "gpt-3.5-turbo".
  * @return {Promise<string[]>} The list of suggestions.
  */
-export const generateSuggestionsBasedOnSongs = async (
+exports.generateSuggestionsBasedOnSongs = async (
   openAiApiKey,
   songTitles,
   numberOfSuggestions = 10,
@@ -142,7 +142,7 @@ export const generateSuggestionsBasedOnSongs = async (
  * @param {string} gptModel The GPT model to use. Defaults to "gpt-3.5-turbo".
  * @return {Promise<string[]>} The list of suggestions.
  */
-export const generateSuggestionsBasedOnKeywords = async (
+exports.generateSuggestionsBasedOnKeywords = async (
   openAiApiKey,
   keywords,
   numberOfSuggestions = 10,

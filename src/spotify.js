@@ -4,7 +4,7 @@
  * @param {string} spotifyCredentials The Spotify Basic credentials to use.
  * @return {Promise} The Spotify access token.
  */
-export const getSpotifyAccessToken = async (spotifyCredentials) => {
+exports.getSpotifyAccessToken = async (spotifyCredentials) => {
   if (!spotifyCredentials || spotifyCredentials.length === 0) {
     throw new Error("No Spotify credentials supplied.");
   }
@@ -34,7 +34,7 @@ export const getSpotifyAccessToken = async (spotifyCredentials) => {
  * @param {string} spotifyRefreshToken The Spotify refresh token to use.
  * @return {Promise} The Spotify account access token.
  */
-export const getSpotifyAccountAccessToken = async (spotifyCredentials, spotifyRefreshToken) => {
+exports.getSpotifyAccountAccessToken = async (spotifyCredentials, spotifyRefreshToken) => {
   if (!spotifyCredentials || spotifyCredentials.length === 0) {
     throw new Error("No Spotify credentials supplied.");
   }
@@ -68,7 +68,7 @@ export const getSpotifyAccountAccessToken = async (spotifyCredentials, spotifyRe
  * @param {string} accessToken The Spotify access token.
  * @return {Promise} The found Spotify tracks.
  */
-export const searchSpotifyTracks = async (searchText, accessToken) => {
+const searchSpotifyTracks = async (searchText, accessToken) => {
   if (!accessToken || accessToken.length === 0) {
     throw new Error("No Spotify access token supplied.");
   }
@@ -94,13 +94,15 @@ export const searchSpotifyTracks = async (searchText, accessToken) => {
   }
 };
 
+exports.searchSpotifyTracks = searchSpotifyTracks;
+
 /**
  * Retrieves a Spotify track for the given title, if one exists.
  * @param {string} title The title of the song to search for.
  * @param {string} accessToken The Spotify access token.
  * @return {Promise} The found Spotify track.
  */
-export const getSpotifyTrackForTitle = async (title, accessToken) => {
+exports.getSpotifyTrackForTitle = async (title, accessToken) => {
   if (!accessToken || accessToken.length === 0) {
     throw new Error("No Spotify access token supplied.");
   }
@@ -129,7 +131,7 @@ export const getSpotifyTrackForTitle = async (title, accessToken) => {
  * @param {string} spotifyAccountAccessToken The Spotify account access token.
  * @return {Promise} The Spotify playlist ID.
  */
- export const createSpotifyPlaylist = async (name, description, trackIds, publicPlaylist, spotifyAccountId, spotifyAccountAccessToken) => {
+exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlaylist, spotifyAccountId, spotifyAccountAccessToken) => {
   if (!name || name.length === 0) {
     throw new Error("No playlist name supplied.");
   }
