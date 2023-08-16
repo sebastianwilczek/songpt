@@ -1,5 +1,9 @@
 # songpt
 
+<p align="center">
+  <img src="https://songpt-ai.web.app/songpt.webp" alt="songpt" height="128"/>
+</p>
+
 [![npm version](https://img.shields.io/npm/v/songpt.svg?style=flat-square)](https://www.npmjs.org/package/songpt)
 
 songpt is a Node.js package that generates tracks for music playlists fitting input prompts.
