@@ -1,4 +1,5 @@
 const MAIN_LIST_PROMPT = "Assume there is a list of songs. The list has a topic. Each song in the list is fitting to that topic. More songs that are similar are needed.";
+const topicPrompt = (topic) => `The topic of the list is ${topic}.`;
 const EXISTING_SONGS_PROMPT = "These songs have already been added to the list:";
 const KEYWORDS_PROMPT = "The category fits these keywords:";
 const numberOfSuggestionsPrompt = (numberOfSuggestions) => `Generate a list of ${numberOfSuggestions} songs that fit the same category.`;
@@ -6,27 +7,30 @@ const RETURN_PROMPT = `Do not offer any explanation. Do not add any commentary. 
 
 /**
  * Generates the suggestion prompt for OpenAI.
- * The prompt is based on the song titles supplied.
- * It instructs OpenAI to generate a list of songs that fit the same category as the already listed songs.
+ * The prompt is based on the song titles supplied, and the given topic.
+ * It instructs OpenAI to generate a list of songs that fit the same category as the already listed songs and the topic.
+ * The topic is skipped if it is not supplied.
  * @param {string[]} songTitles The song titles to base the suggestions on.
+ * @param {string} topic The topic to base the suggestions on.
  * @param {number} numberOfSuggestions The number of suggestions to generate.
  * @return {string} The prompt for OpenAI.
  */
- const generateSuggestionPrompBasedOnSongs = (songTitles, numberOfSuggestions) => {
+const generateSuggestionPrompBasedOnSongs = (songTitles, topic, numberOfSuggestions) => {
   const songList = songTitles.join(",");
-  return `${MAIN_LIST_PROMPT} ${EXISTING_SONGS_PROMPT} ${songList}. ${numberOfSuggestionsPrompt(numberOfSuggestions)} ${RETURN_PROMPT}`;
-};
+  return `${MAIN_LIST_PROMPT} ${topic?.length > 0 ? topicPrompt(topic) : ""} ${EXISTING_SONGS_PROMPT} ${songList}. ${numberOfSuggestionsPrompt(numberOfSuggestions)} ${RETURN_PROMPT}`;
+}
 
 /**
  * Generates the suggestion prompt for OpenAI.
- * The prompt is based on keywords supplied.
- * It instructs OpenAI to generate a list of songs that fit the same category as fitting to the keywords.
+ * The prompt is based on keywords supplied, and the given topic.
+ * It instructs OpenAI to generate a list of songs that fit the same category as fitting to the keywords and the topic.
  * @param {string} keywords The keywords to base the suggestions on.
+ * @param {string} topic The topic to base the suggestions on.
  * @param {number} numberOfSuggestions The number of suggestions to generate.
  * @return {string} The prompt for OpenAI.
  */
- const generateSuggestionPromptBasedOnKeywords = (keywords, numberOfSuggestions) => {
-  return `${MAIN_LIST_PROMPT} ${KEYWORDS_PROMPT} ${keywords}. ${numberOfSuggestionsPrompt(numberOfSuggestions)} ${RETURN_PROMPT}`;
+const generateSuggestionPromptBasedOnKeywords = (keywords, topic, numberOfSuggestions) => {
+  return `${MAIN_LIST_PROMPT} ${topic?.length > 0 ? topicPrompt(topic) : ""} ${KEYWORDS_PROMPT} ${keywords}. ${numberOfSuggestionsPrompt(numberOfSuggestions)} ${RETURN_PROMPT}`;
 };
 
 /**
@@ -108,9 +112,10 @@ const generateSuggestions = async (
 };
 
 /**
- * Calls the OpenAI API to generate a list of song suggestions based on the song titles supplied.
+ * Calls the OpenAI API to generate a list of song suggestions based on the song titles supplied and the given topic.
  * @param {string} openAiApiKey The OpenAI API key to use.
  * @param {string[]} songTitles The song titles to base the suggestions on.
+ * @param {string} topic The topic to base the suggestions on.
  * @param {number} numberOfSuggestions The number of suggestions to generate.
  * @param {string} gptModel The GPT model to use. Defaults to "gpt-3.5-turbo".
  * @return {Promise<string[]>} The list of suggestions.
@@ -118,6 +123,7 @@ const generateSuggestions = async (
 exports.generateSuggestionsBasedOnSongs = async (
   openAiApiKey,
   songTitles,
+  topic = "",
   numberOfSuggestions = 10,
   gptModel = "gpt-3.5-turbo",
 ) => {
@@ -125,7 +131,7 @@ exports.generateSuggestionsBasedOnSongs = async (
     throw new Error("No song titles supplied.");
   }
 
-  const prompt = generateSuggestionPrompBasedOnSongs(songTitles, numberOfSuggestions);
+  const prompt = generateSuggestionPrompBasedOnSongs(songTitles, topic, numberOfSuggestions);
   return generateSuggestions(
     openAiApiKey,
     prompt,
@@ -138,6 +144,7 @@ exports.generateSuggestionsBasedOnSongs = async (
  * Calls the OpenAI API to generate a list of song suggestions based on the keywords supplied.
  * @param {string} openAiApiKey The OpenAI API key to use.
  * @param {string} keywords The keywords to base the suggestions on.
+ * @param {string} topic The topic to base the suggestions on.
  * @param {number} numberOfSuggestions The number of suggestions to generate.
  * @param {string} gptModel The GPT model to use. Defaults to "gpt-3.5-turbo".
  * @return {Promise<string[]>} The list of suggestions.
@@ -145,6 +152,7 @@ exports.generateSuggestionsBasedOnSongs = async (
 exports.generateSuggestionsBasedOnKeywords = async (
   openAiApiKey,
   keywords,
+  topic = "",
   numberOfSuggestions = 10,
   gptModel = "gpt-3.5-turbo",
 ) => {
@@ -152,7 +160,7 @@ exports.generateSuggestionsBasedOnKeywords = async (
     throw new Error("No keywords supplied.");
   }
 
-  const prompt = generateSuggestionPromptBasedOnKeywords(keywords, numberOfSuggestions);
+  const prompt = generateSuggestionPromptBasedOnKeywords(keywords, topic, numberOfSuggestions);
   return generateSuggestions(
     openAiApiKey,
     prompt,

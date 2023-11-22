@@ -74,15 +74,15 @@ generatePlaylistBasedOnSongs("openAiApiKey", "spotifyCredentials", "spotifyRefre
 These functions return the names of songs and artists based on given inputs. This is the part of songpt that interacts with OpenAI and is used only for generating suggestions, without translating them to Spotify playlists or tracks.
 
 - generateSuggestionsBasedOnKeywords
-Generates a list of songs based on the given keyword string.
+Generates a list of songs based on the given keyword string and topic. Topic is optional, and if not provided, will be extracted from the given keywords.
 ```
-generateSuggestionsBasedOnKeywords("openAiApiKey", "Jazz music, but fast", 10, "gpt-3.5-turbo",)
+generateSuggestionsBasedOnKeywords("openAiApiKey", "Jazz music, but fast", "Jazz", 10, "gpt-3.5-turbo",)
 ```
 
 - generateSuggestionsBasedOnSongs
-Generates a list of songs based on the given keyword string.
+Generates a list of songs based on the given list of song titles and topic. Topic is optional, and if not provided, will be extracted from the given songs.
 ```
-generateSuggestionsBasedOnSongs("openAiApiKey", ["Circles Post Malone", "Humble Kendrick Lamar", "Congratulation Post Malone"], 10, "gpt-3.5-turbo",)
+generateSuggestionsBasedOnSongs("openAiApiKey", ["Circles Post Malone", "Humble Kendrick Lamar", "Congratulation Post Malone"], "Rap", 10, "gpt-3.5-turbo",)
 ```
 
 ### Spotify Interaction

@@ -23,7 +23,7 @@ exports.getSpotifyAccessToken = async (spotifyCredentials) => {
     const responseData = await response.json();
     return responseData?.access_token;
   } catch (e) {
-    throw new Error("Could not call Spotify API. Make sure your credentials are valid.");
+    throw new Error("Could not call Spotify API. Make sure your credentials are valid." + e);
   }
 };
 
@@ -58,7 +58,7 @@ exports.getSpotifyAccountAccessToken = async (spotifyCredentials, spotifyRefresh
     const responseData = await response.json();
     return responseData?.access_token;
   } catch (e) {
-    throw new Error("Could not call Spotify API. Make sure your credentials are valid.");
+    throw new Error("Could not call Spotify API. Make sure your credentials are valid." + e);
   }
 };
 
@@ -90,7 +90,7 @@ const searchSpotifyTracks = async (searchText, accessToken) => {
   
     return responseData.tracks.items;
   } catch (e) {
-    throw new Error("Could not call Spotify API. Make sure you have supplied a valid Spotify Access Token.");
+    throw new Error("Could not call Spotify API. Make sure you have supplied a valid Spotify Access Token." + e);
   }
 };
 
@@ -111,7 +111,7 @@ exports.getSpotifyTrackForTitle = async (title, accessToken) => {
   try {
     items = await searchSpotifyTracks(title, accessToken);
   } catch (e) {
-    throw new Error("Could not call Spotify API. Make sure you have supplied a valid Spotify Access Token.");
+    throw new Error("Could not call Spotify API. Make sure you have supplied a valid Spotify Access Token." + e);
   }
 
   if (items.length === 0) {
@@ -175,7 +175,7 @@ exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlayli
     const responseData = await response.json();
     playlistId = responseData?.id;
   } catch (e) {
-    throw new Error("Could not call Spotify API. Make sure you have supplied a valid Spotify Account Access Token.");
+    throw new Error("Could not call Spotify API. Make sure you have supplied a valid Spotify Account Access Token." + e);
   }
 
   if (!playlistId) {
@@ -196,7 +196,7 @@ exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlayli
       }),
     });
   } catch (e) {
-    throw new Error("Could not call Spotify API. Make sure you have supplied a valid Spotify Account Access Token.");
+    throw new Error("Could not call Spotify API. Make sure you have supplied a valid Spotify Account Access Token." + e);
   }
 
   if (!addTracksResponse) {
