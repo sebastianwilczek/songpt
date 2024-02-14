@@ -182,6 +182,24 @@ exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlayli
     throw new Error("Spotify API did not return a playlist ID.");
   }
 
+  // The Spotify API only allows 100 tracks to be added at a time, hence we are chunking into groups of 64.
+  const trackIdChunks = [];
+  for (let i = 0; i < trackIds.length; i += 64) {
+    trackIdChunks.push(trackIds.slice(i, i + 64));
+  }
+
+  try {
+    for (const chunk of trackIdChunks) {
+      await addTracksToPlaylist(playlistId, chunk, spotifyAccountId, spotifyAccountAccessToken);
+    }
+  } catch (e) {
+    throw new Error("Could not add tracks to the playlist." + e);
+  }
+
+  return playlistId;
+};
+
+const addTracksToPlaylist = async (playlistId, trackIds, spotifyAccountId, spotifyAccountAccessToken) => {
   let addTracksResponse;
   try {
     addTracksResponse = await fetch(`https://api.spotify.com/v1/users/${spotifyAccountId}/playlists/${playlistId}/tracks`, {
@@ -202,6 +220,4 @@ exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlayli
   if (!addTracksResponse) {
     throw new Error("Spotify API did not return a response when adding tracks to the playlist.");
   }
-
-  return playlistId;
 };
