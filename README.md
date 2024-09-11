@@ -76,13 +76,13 @@ These functions return the names of songs and artists based on given inputs. Thi
 - generateSuggestionsBasedOnKeywords
 Generates a list of songs based on the given keyword string and topic. Topic is optional, and if not provided, will be extracted from the given keywords.
 ```
-generateSuggestionsBasedOnKeywords("openAiApiKey", "Jazz music, but fast", "Jazz", 10, "gpt-3.5-turbo",)
+generateSuggestionsBasedOnKeywords("openAiApiKey", "Jazz music, but fast", "Jazz", 10, "gpt-4o-mini",)
 ```
 
 - generateSuggestionsBasedOnSongs
 Generates a list of songs based on the given list of song titles and topic. Topic is optional, and if not provided, will be extracted from the given songs.
 ```
-generateSuggestionsBasedOnSongs("openAiApiKey", ["Circles Post Malone", "Humble Kendrick Lamar", "Congratulation Post Malone"], "Rap", 10, "gpt-3.5-turbo",)
+generateSuggestionsBasedOnSongs("openAiApiKey", ["Circles Post Malone", "Humble Kendrick Lamar", "Congratulation Post Malone"], "Rap", 10, "gpt-4o-mini",)
 ```
 
 ### Spotify Interaction

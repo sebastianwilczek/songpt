@@ -65,14 +65,14 @@ const callOpenAI = async (prompt, openAiApiKey, gptModel) => {
  * @param {string} openAiApiKey The OpenAI API key to use.
  * @param {string} prompt The prompt to send to OpenAI.
  * @param {number} numberOfSuggestions The number of suggestions to generate.
- * @param {string} gptModel The GPT model to use. Defaults to "gpt-3.5-turbo".
+ * @param {string} gptModel The GPT model to use. Defaults to "gpt-4o-mini".
  * @return {Promise<string[]>} The list of suggestions.
  */
 const generateSuggestions = async (
   openAiApiKey,
   prompt,
   numberOfSuggestions = 10,
-  gptModel = "gpt-3.5-turbo",
+  gptModel = "gpt-4o-mini",
 ) => {
   if (!openAiApiKey || openAiApiKey.length === 0) {
     throw new Error("No OpenAI API key supplied.");
@@ -117,7 +117,7 @@ const generateSuggestions = async (
  * @param {string[]} songTitles The song titles to base the suggestions on.
  * @param {string} topic The topic to base the suggestions on.
  * @param {number} numberOfSuggestions The number of suggestions to generate.
- * @param {string} gptModel The GPT model to use. Defaults to "gpt-3.5-turbo".
+ * @param {string} gptModel The GPT model to use. Defaults to "gpt-4o-mini".
  * @return {Promise<string[]>} The list of suggestions.
  */
 exports.generateSuggestionsBasedOnSongs = async (
@@ -125,7 +125,7 @@ exports.generateSuggestionsBasedOnSongs = async (
   songTitles,
   topic = "",
   numberOfSuggestions = 10,
-  gptModel = "gpt-3.5-turbo",
+  gptModel = "gpt-4o-mini",
 ) => {
   if (!songTitles || songTitles.length === 0) {
     throw new Error("No song titles supplied.");
@@ -146,7 +146,7 @@ exports.generateSuggestionsBasedOnSongs = async (
  * @param {string} keywords The keywords to base the suggestions on.
  * @param {string} topic The topic to base the suggestions on.
  * @param {number} numberOfSuggestions The number of suggestions to generate.
- * @param {string} gptModel The GPT model to use. Defaults to "gpt-3.5-turbo".
+ * @param {string} gptModel The GPT model to use. Defaults to "gpt-4o-mini".
  * @return {Promise<string[]>} The list of suggestions.
  */
 exports.generateSuggestionsBasedOnKeywords = async (
@@ -154,7 +154,7 @@ exports.generateSuggestionsBasedOnKeywords = async (
   keywords,
   topic = "",
   numberOfSuggestions = 10,
-  gptModel = "gpt-3.5-turbo",
+  gptModel = "gpt-4o-mini",
 ) => {
   if (!keywords || keywords.length === 0) {
     throw new Error("No keywords supplied.");
