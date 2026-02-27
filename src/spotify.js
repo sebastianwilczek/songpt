@@ -74,7 +74,7 @@ const searchSpotifyTracks = async (searchText, accessToken) => {
   }
 
   try {
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchText)}&type=track`, {
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchText)}&type=track&limit=10`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
