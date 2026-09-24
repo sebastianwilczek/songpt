@@ -156,9 +156,11 @@ exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlayli
     throw new Error("No Spotify account access token supplied.");
   }
 
+  const url = spotifyAccountId === "me" ? `https://api.spotify.com/v1/me/playlists` : `https://api.spotify.com/v1/users/${spotifyAccountId}/playlists`;
+
   let playlistId;
   try {
-    const response = await fetch(`https://api.spotify.com/v1/users/${spotifyAccountId}/playlists`, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -167,7 +169,7 @@ exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlayli
       },
       body: JSON.stringify({
         name,
-        description: `${description} Powered by songpt.`,
+        description,
         public: publicPlaylist,
       }),
     });
@@ -190,7 +192,7 @@ exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlayli
 
   try {
     for (const chunk of trackIdChunks) {
-      await addTracksToPlaylist(playlistId, chunk, spotifyAccountId, spotifyAccountAccessToken);
+      await addTracksToPlaylist(playlistId, chunk, spotifyAccountAccessToken);
     }
   } catch (e) {
     throw new Error("Could not add tracks to the playlist." + e);
@@ -199,10 +201,10 @@ exports.createSpotifyPlaylist = async (name, description, trackIds, publicPlayli
   return playlistId;
 };
 
-const addTracksToPlaylist = async (playlistId, trackIds, spotifyAccountId, spotifyAccountAccessToken) => {
+const addTracksToPlaylist = async (playlistId, trackIds, spotifyAccountAccessToken) => {
   let addTracksResponse;
   try {
-    addTracksResponse = await fetch(`https://api.spotify.com/v1/users/${spotifyAccountId}/playlists/${playlistId}/tracks`, {
+    addTracksResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/items`, {
       method: "POST",
       headers: {
         Accept: "application/json",
